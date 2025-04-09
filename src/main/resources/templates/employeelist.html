@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>employee-list</title>
+</head>
+<body>
+	<div th:insert="header.html"></div>
+	<div class="container">
+		<table id="employeeTable">
+			<thead>
+				<tr>
+					<th class="col-2 text-center">Name</th>
+					<th class="col-2 text-center">Company</th>
+					<th class="col-2 text-center">Phone</th>
+					<th class="col-1 text-center">City</th>
+					<th class="col-1 text-center">State</th>
+					<th class="col-1 text-center">Age</th>
+					<th class="col-3 text-center">Action</th>
+				</tr>
+			</thead>
+			<tbody th:each="employee : ${elist}">
+				<tr>
+					<td class=" text-center">[[${employee.firstname}+'
+						'+${employee.lastname}]]</td>
+					<td class=" text-center">[[${employee.companyname}]]</td>
+					<td class=" text-center">[[${employee.phone}]]</td>
+					<td class=" text-center">[[${employee.address.city}]]</td>
+					<td class=" text-center">[[${employee.address.state}]]</td>
+					<td class=" text-center">[[${employee.age}]]</td>
+					<td class=" text-center"><a
+						th:href="@{edit?(id=${employee.id})}"><input
+							class="btn btn-success" type="submit" value="Edit"></a> <a
+						th:href="@{delete?(id=${employee.id})}"><input
+							class="btn btn-danger" type="submit" value="delete"></a></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#employeeTable').DataTable();
+			});
+		</script>
+
+		<hr>
+		<div class="my-3 text-center ">
+			<a class="text-danger" href="/employee/employeeform">Add employee</a>
+		</div>
+		<div class="my-3 text-center ">
+			<a class="text-danger" href="/employee/home">Cancel</a>
+		</div>
+	</div>
+	<div th:insert="footer.html"></div>
+</body>
+</html>

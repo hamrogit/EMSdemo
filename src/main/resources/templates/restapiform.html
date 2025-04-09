@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>restApi</title>
+</head>
+<body>
+	<div th:insert="header"></div>
+
+	<table class="table table-stripted">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Title</th>
+				<th>Price</th>
+				<th>Description</th>
+				<th>Category</th>
+				<th>Rate</th>
+				<th>Count</th>
+			</tr>
+		</thead>
+		<tbody id="postTable">
+			<tr></tr>
+		</tbody>
+	</table>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$.ajax({
+				url : "https://fakestoreapi.com/products"
+			}).then(function(data) {
+				
+				var row = '<tr>';
+				for (var i = 0; i < data.length; i++) {
+					row += '<tr>'
+					row += '<td>' + data[i].id + '</td>';
+					row += '<td>' + data[i].title + '</td>';
+					row += '<td>' + data[i].price + '</td>';
+					row += '<td>' + data[i].description + '</td>';
+					row += '<td>' + data[i].category + '</td>';
+					row += '<td>' + data[i].rating.rate + '</td>';
+					row += '<td>' + data[i].rating.count + '</td>';
+					row += '<tr>';
+				}
+				$('#postTable').append(row);
+			});
+		});
+	</script>
+</body>
+</html>
